@@ -1,0 +1,93 @@
+<?php
+
+$filename = $_GET['f'];
+$stylesheet = "textfiles.css";
+$stylesheet_href = $stylesheet . "?v=" . filemtime($stylesheet);
+
+?>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://your.web.site/FontAwesome.css' type='text/css' rel='stylesheet' />
+	<link href='<?php echo $stylesheet_href; ?>' type='text/css' rel='stylesheet' />
+	<script type='text/javascript' src='textfiles.js'></script>
+</head>
+<body>
+
+<div class='compensator'>
+</div>
+
+<pre>
+<?php echo htmlentities(file_get_contents($filename)); ?>
+</pre>
+
+<div id='ui-elements-container'>
+	<div id='controls'>
+		<div class='buttons'>
+			<button 
+				type='button'
+				class='button copy-raw-link'
+				title='Copy raw link to clipboard [k]'
+				data-label='Raw link'
+				data-main-action='copyRawLinkButtonClicked'
+				data-success-message='Raw file URL copied to clipboard.'
+				accesskey='k'
+					>&#xf121;</button>
+			<a
+				class='button raw'
+				title='View raw file [r]'
+				data-label='View raw'
+				accesskey='r'
+				href='<?php echo str_replace('.txt', '', $filename); ?>/raw'
+					>&#xf036;</a>
+			<button
+				type='button'
+				class='button copy-text'
+				title='Copy text to clipboard [c]'
+				data-label='Copy text'
+				data-main-action='copyTextButtonClicked'
+				data-success-message='Text copied to clipboard.'
+				accesskey='c'
+					>&#xf0c5;</button>
+			<button
+				type='button'
+				class='button copy-link'
+				title='Copy link to clipboard [l]'
+				data-label='Copy link'
+				data-main-action='copyLinkButtonClicked'
+				data-success-message='URL copied to clipboard.'
+				accesskey='l'
+					>&#xf0c1;</button>
+		</div>
+		<span class='message'></span>
+	</div>
+	<textarea id='scratchpad'></textarea>
+</div>
+
+</body>
+<script type='text/javascript'>
+	copyLinkButtonClicked = () => {
+		copyTextToClipboard(location);
+	};
+	copyRawLinkButtonClicked = () => {
+		copyTextToClipboard(location + "/raw");
+	};
+	copyTextButtonClicked = () => {
+		selectElementContents(document.querySelector("pre"));
+		document.execCommand("copy");
+	};
+
+	document.querySelectorAll("#controls button").forEach(button => {
+		button.addActivateEvent((event) => {
+			event.target.blur();
+			window[event.target.dataset["mainAction"]]();
+			setMessage(event.target.dataset["successMessage"]);
+		});
+	});
+	
+	setTimeout(() => {
+		selectElementContents(document.querySelector("pre"));
+	}, 0);
+</script>
+</html>

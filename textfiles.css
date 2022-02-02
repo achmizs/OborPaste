@@ -1,0 +1,153 @@
+html {
+	box-sizing: border-box;
+	font-size: 20px;
+}
+*, *::before, *::after {
+	box-sizing: inherit;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+.compensator {
+	width: 15rem;
+	height: 4.5rem;
+	float: right;
+	pointer-events: none;
+}
+@media only screen and (max-width: 520px) {
+	.compensator {
+		display: none;
+	}
+}
+
+pre {
+	font-family: Inconsolata, monospace;
+	-moz-tab-size: 4;
+	tab-size: 4;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	padding: 0.5em;
+}
+
+#ui-elements-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	pointer-events: none;
+}
+#ui-elements-container > * {
+	pointer-events: auto;
+}
+
+#controls {
+	position: absolute;
+	top: 0;
+	right: 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+@media only screen and (max-width: 520px) {
+	#controls {
+		display: flex;
+		flex-flow: row-reverse;
+		align-items: flex-end;
+		width: 100%;
+		top: unset;
+		bottom: 0;
+	}
+}
+#controls .buttons {
+	display: flex;
+	flex-flow: row-reverse wrap;
+	background-color: #fff;
+	padding: 1px;
+}
+@media only screen and (max-width: 520px) {
+	#controls .buttons {
+		flex-flow: column;
+	}
+}
+
+#controls .button {
+	background-color: #e00;
+	font-size: 1.5em;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	text-decoration: none;
+	font-family: Font Awesome;
+	color: #fff;
+	padding: 1px 0 0 0;
+	border: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	cursor: pointer;
+}
+#controls .button + .button {
+	margin: 0 1px 0 0;
+}
+@media only screen and (max-width: 520px) {
+	#controls .button + .button {
+		margin: 1px 0 0 0;
+	}
+}
+@media only screen and (hover:hover) and (pointer:fine) {
+	#controls .button:hover {
+		color: gold;
+	}
+}
+#controls .button:active {
+	transform: scale(0.975);
+}
+#controls .button:focus {
+	outline: none;
+}
+#controls .button::after {
+	content: attr(data-label);
+	display: block;
+	font-family: sans-serif;
+	font-size: 0.5rem;
+	font-weight: bold;
+	margin: 6px 0 0 0;
+	text-transform: uppercase;
+}
+
+#controls .message {
+	display: block;
+	margin: 1px 0 0 0;
+	padding: 0.25em 0.5em;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 0.75em;
+	color: #b00;
+}
+#controls .message:not(:empty) {
+	background-color: #fff;
+}
+@media only screen and (max-width: 520px) {
+	#controls .message {
+		margin: 0 0 1px 1px;
+		flex: 1 1 100%;
+		padding: 0.5em 0.75em;
+		font-size: 0.875em;
+	}
+	#controls .message:not(:empty) {
+		outline: 1px solid #fff;
+		border: 1px solid #e00;
+	}
+}
+
+#scratchpad {
+	opacity: 0;
+	z-index: -1;
+	pointer-events: none;
+}

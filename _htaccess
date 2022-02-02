@@ -1,0 +1,34 @@
+RewriteEngine on 
+RewriteBase /textfiles/
+
+# Send requests without parameters to textfiles.php.
+# RewriteRule ^$ textfiles.php  [L]
+
+# Send requests for index.php to textfiles.php.
+# RewriteRule ^index\.php$ textfiles.php  [L]
+
+# Send requests for index.html to textfiles.php.
+# RewriteRule ^index\.html$ textfiles.php  [L]
+
+# Send requests for textfiles.css to textfiles.css.
+RewriteRule ^textfiles\.css$ textfiles.css  [L]
+
+# Send requests for textfiles.js to textfiles.js.
+RewriteRule ^textfiles\.js$ textfiles.js  [L]
+
+# Send requests for textfiles.php to textfiles.php.
+RewriteRule ^textfiles\.php$ textfiles.php  [L]
+
+# Send requests for textfiles.html to textfiles.php.
+# NOTE: THIS IS NOT A TYPO!
+RewriteRule ^textfiles\.html$ textfiles.php  [L]
+
+# Send requests for files that exist to textfiles.php (raw).
+RewriteCond %{REQUEST_URI} ^\/textfiles\/(.+)/raw$
+RewriteCond /file/path/to/your/textfiles/%1 -f
+RewriteRule ^(.+)/raw$ textfiles.php?f=$1&m=raw [QSA,L]
+
+# Send requests for files that exist to textfiles.php.
+RewriteCond %{REQUEST_URI} ^\/textfiles\/(.+)$
+RewriteCond /file/path/to/your/textfiles/%1 -f
+RewriteRule ^(.+)$ textfiles.php?f=$1 [QSA,L]
