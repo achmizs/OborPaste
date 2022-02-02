@@ -6,7 +6,7 @@ Rename `_htaccess` to `.htaccess`. Replace the placeholder URLs and file paths i
 
 ## Usage
 
-Post textfiles by sending a POST request to `/textfiles/textfiles.php`, with two parameters: `f` (whose value should be the contents of the textfile) and `p` (whose value should be the API key you’ve defined in `textfiles.php`.
+Post textfiles by sending a POST request to `/textfiles/textfiles.php`, with two parameters: `f` (whose value should be the contents of the textfile) and `p` (whose value should be the API key you’ve defined in `textfiles.php`).
 
 The response to the POST request will contain the URL of the newly-created paste. You can append `/raw` to that URL to view the raw text of the paste.
 
