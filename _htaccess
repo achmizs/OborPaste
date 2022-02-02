@@ -1,3 +1,7 @@
+Options +MultiViews
+
+AddCharset utf-8 .html .css .php .txt .js
+
 RewriteEngine on 
 RewriteBase /textfiles/
 
