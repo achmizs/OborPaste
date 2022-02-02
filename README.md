@@ -10,6 +10,8 @@ Post textfiles by sending a POST request to `/textfiles/textfiles.php`, with two
 
 The response to the POST request will contain the URL of the newly-created paste. You can append `/raw` to that URL to view the raw text of the paste.
 
+Setting up a mechanism for posting pastes is currently left as an exercise for the reader. (There are many ways to do this: one could have a simple shell script that takes text from `stdin` and uses `curl` to issue a POST request to the script URL; one could put together something like a Cocoa Service with Apple’s Automator, to allow posting text from any application as a paste; one could even have some sort of web form—backed by another PHP script, running on the same server—to allow posting of pastes from the web. Note that if you opt for the last option, you should take care to secure the posting form somehow, lest your pastebin server be flooded by all manner of junk…)
+
 ## Notes
 
 You can, of course, change the path from `/textfiles/` to anything else, modifying the scripts, config files, etc. in the obvious manner.
